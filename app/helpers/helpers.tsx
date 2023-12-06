@@ -1,7 +1,7 @@
 const contentful = require("contentful");
 const client = contentful.createClient({
-  space: "812nv7ll3wb5",
-  accessToken: "tlP40MEDQGjRmqeSL9tS__Eg3C4aiVH7K8d7gISqey0",
+  space: process.env.CONTENTFUL_SPACE_ID,
+  accessToken: process.env.CONTENTFUL_ACCESS_KEY,
 });
 
 export async function getLandingPage() {
