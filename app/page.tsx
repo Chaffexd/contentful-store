@@ -1,6 +1,6 @@
-import Hero from "./components/Hero/Hero";
-import HeroDesc from "./components/Hero/HeroDesc";
-import { getLandingPage } from "./helpers/helpers";
+import Hero from "../components/Hero/Hero";
+import HeroDesc from "../components/Hero/HeroDesc";
+import { getLandingPage } from "../helpers/helpers";
 
 // this will cause the page to revalidate every hour for any changes
 export const revalidate = 3600;

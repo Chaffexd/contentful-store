@@ -21,3 +21,12 @@ export async function getNavBar() {
     console.error(error);
   }
 }
+
+export async function getProductsPage () {
+    try {
+        const productPage = await client.getEntry("6hwaGRYuWpLvtUfaQt2xgk");
+        return productPage;
+    } catch (error) {
+        console.log(error)
+    }
+}

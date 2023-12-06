@@ -1,10 +1,9 @@
-import { getLandingPage, getNavBar } from "@/app/helpers/helpers";
+import { getLandingPage, getNavBar } from "@/helpers/helpers";
 import Link from "next/link";
 
 const Navigation = async () => {
   const navBar = await getNavBar();
   const navItems: NavElement[] = navBar.fields.navElements;
-  console.log(navItems)
 
   return (
     <nav className="w-full h-20">
