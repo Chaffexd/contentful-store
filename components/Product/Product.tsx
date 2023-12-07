@@ -1,4 +1,6 @@
+"use client";
 import Image from "next/image";
+import useStore from "../store/store";
 
 type ProductInfoProps = {
   productInfo: {
@@ -55,10 +57,7 @@ type ProductInfoProps = {
 };
 
 const Product = ({ productInfo }: ProductInfoProps) => {
-  console.log(
-    "PRODUCT INFORMATION===",
-    productInfo
-  );
+  // console.log("PRODUCT INFORMATION===", productInfo);
   const title = productInfo.items[0].fields.productTitle;
   const productDescription =
     productInfo.items[0].fields.productDescription.content[0].content[0].value;
@@ -67,6 +66,20 @@ const Product = ({ productInfo }: ProductInfoProps) => {
     currency: "GBP",
   });
   const image = productInfo.items[0].fields.productImage.fields.file.url;
+
+  const addToCart = useStore((state) => state.addToCart);
+  
+  const currentCart = useStore((state) => state.cart);
+  console.log("THE CART:===", currentCart)
+
+  const addProductHandler = () => {
+    addToCart({
+      title: title,
+      price: productInfo.items[0].fields.price,
+      image: image
+    })
+  };
+
   return (
     <>
       <div className="w-1/2">
@@ -85,7 +98,9 @@ const Product = ({ productInfo }: ProductInfoProps) => {
         </div>
         <div className="flex justify-between items-center">
           <p>{price}</p>
-          <button className="p-2 bg-blue-200 rounded-lg w-1/4 hover:bg-blue-400">Purchase Now</button>
+          <button className="p-2 bg-cyan-300 rounded-lg w-1/4 hover:bg-cyan-400 text-white" onClick={addProductHandler}>
+            Add to cart
+          </button>
         </div>
       </div>
     </>

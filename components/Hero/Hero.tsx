@@ -14,7 +14,7 @@ const Hero = ({ coreInfo }: { coreInfo: coreInfo }) => {
   const imageURL = `https:${landingImage.fields.file.url}`;
 
   return (
-    <div className="h-5/6 w-full relative">
+    <div className="h-screen w-full relative">
       <Image
         src={imageURL}
         alt={landingImage.fields.title}

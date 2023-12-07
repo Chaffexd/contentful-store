@@ -11,8 +11,8 @@ export default async function Home() {
   // console.log(coreInfo)
 
   return (
-    <main>
-      <section className="h-screen">
+    <main className="">
+      <section className="">
         <Hero coreInfo={coreInfo} />
         <HeroDesc descriptionInfo={coreInfo.sections[2]} />
       </section>

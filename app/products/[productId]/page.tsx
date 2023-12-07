@@ -32,7 +32,7 @@ const ProductDetailPage = async ({
   const productInfo = await getSingleProduct(productId);
 
   return (
-    <section className="px-20 pt-10 flex flex-col md:flex-row w-full gap-8 mt-16">
+    <section className="px-20 pt-10 flex flex-col md:flex-row w-full gap-8 mt-16 mb-32">
       <Product productInfo={productInfo} />
     </section>
   );

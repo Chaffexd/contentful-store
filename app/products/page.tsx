@@ -17,7 +17,7 @@ const ProductPage = async () => {
   
   return (
     <section className="w-full">
-      <h1 className="text-center text-3xl">Our Products</h1>
+      <h1 className="text-center text-3xl mt-8">Our Products</h1>
       <Gallery products={products} />
     </section>
   );
