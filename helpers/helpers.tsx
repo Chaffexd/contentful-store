@@ -22,11 +22,40 @@ export async function getNavBar() {
   }
 }
 
-export async function getProductsPage () {
-    try {
-        const productPage = await client.getEntry("6hwaGRYuWpLvtUfaQt2xgk");
-        return productPage;
-    } catch (error) {
-        console.log(error)
-    }
+export async function getProductsPage() {
+  try {
+    const productPage = await client.getEntry("6hwaGRYuWpLvtUfaQt2xgk");
+    return productPage;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getProductsPageEntries() {
+  try {
+    const productPage = await client.getEntries();
+    return productPage;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getAllProducts() {
+  try {
+    const allProducts = await client.getEntries({
+      content_type: "product",
+    });
+    return allProducts;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getSingleProduct(slug: string) {
+  const entry = await client.getEntries({
+    content_type: "product",
+    "fields.slug[match]": slug,
+  });
+
+  return entry;
 }

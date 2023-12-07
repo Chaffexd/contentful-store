@@ -32,10 +32,10 @@ type ProductProps = {
 const Gallery = ({ products }: { products: ProductProps[] }) => {
   // console.log("PRODUCT RESPONSE", products[0].fields.productImage);
 
-  console.log('CATEGORYS', products[3].fields)
+  // console.log('CATEGORYS', products[2].fields)
 
   return (
-    <div className="w-full h-screen grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 pt-12 px-16">
+    <div className="w-full h-screen grid grid-cols-1 md:grid-cols-2 md:grid-cols-3 gap-8 pt-12 px-16">
       {products.map((product) => (
         <Link
           key={product.sys.id}

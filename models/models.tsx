@@ -74,3 +74,15 @@ type IntroductionSection = {
     introduction: string;
   };
 };
+
+
+type ProductInfo = {
+  metadata: Metadata;
+  sys: Sys;
+  fields: {
+    productTitle: string;
+    productDescription: {};
+    category: [];
+    productImage: {};
+  };
+};
