@@ -12,7 +12,7 @@ const ShoppingList = () => {
     currency: "GBP",
   });
 
-  const combinedCart: CartItem[] = cart.reduce((combined, product) => {
+  const combinedCart: CartItem[] = cart.reduce((combined: CartItem[], product: CartItem) => {
     const existingProductIndex = combined.findIndex((item) => item.title === product.title);
 
     if (existingProductIndex !== -1) {
