@@ -9,7 +9,7 @@ export async function generateStaticParams() {
   const products = await getAllProducts();
 
   return products.items.map((product: ProductInfo) => ({
-    productId: product.fields.productTitle,
+    productId: product.fields.productTitle.toLowerCase().replace(/\s+/g, '-'),
   }));
 }
 
@@ -18,8 +18,8 @@ export async function generateMetadata({ params }: Props) {
 
   const product = await getSingleProduct(productId);
   return {
-    title: product.items[0].fields.productTitle,
-    description: product.items[0].fields.productDescription.content[0].content[0].value,
+    title: product.items[0].fields?.productTitle,
+    description: product.items[0].fields?.productDescription?.content[0].content[0].value,
   }
 };
 
