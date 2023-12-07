@@ -13,11 +13,15 @@ const ShoppingList = () => {
   });
 
   const combinedCart: CartItem[] = cart.reduce((combined: CartItem[], product: CartItem) => {
+    // this will go through the carry of items in the cart and if there are matching titles,
+    // the plan is to combine them
     const existingProductIndex = combined.findIndex((item) => item.title === product.title);
 
+    // so if items exist, copy them
     if (existingProductIndex !== -1) {
       // Deep copy the existing product to avoid overwriting references
       const existingProduct = { ...combined[existingProductIndex] };
+      // increase the quantity based on how many there are
       existingProduct.quantity += product.quantity;
       combined[existingProductIndex] = existingProduct;
     } else {
