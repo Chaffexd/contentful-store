@@ -76,7 +76,8 @@ const Product = ({ productInfo }: ProductInfoProps) => {
     addToCart({
       title: title,
       price: productInfo.items[0].fields.price,
-      image: image
+      image: image,
+      quantity: 1
     })
   };
 

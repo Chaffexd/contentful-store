@@ -7,14 +7,19 @@ const ShoppingCart = () => {
   return (
     <Link
       href={"/cart"}
-      className="p-2 rounded-md hover:bg-slate-900 text-slate-700 hover:text-slate-300 relative transition duration-200 ease-in-out"
+      className="p-2 rounded-md hover:bg-cyan-600 text-slate-700 hover:text-white relative transition duration-200 ease-in-out"
     >
       <ShoppingCartIcon className="w-6 h-6" strokeWidth={2} />
       <Label items={0} />
     </Link>
   );
 };
-const Label: React.FC<{}> = () => {
+
+type LabelProps = {
+    items: number;
+}
+
+const Label: React.FC<LabelProps> = () => {
   const cart = useStore((state) => state.cart);
   if (cart.length === 0) return <></>;
 

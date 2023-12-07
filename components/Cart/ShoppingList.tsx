@@ -1,17 +1,34 @@
 "use client";
 import Image from "next/image";
-import useStore from "../store/store";
+import useStore, { CartItem } from "../store/store";
 
 const ShoppingList = () => {
-  const cart = useStore((state) => state.cart);
+  const cart: CartItem[] = useStore((state) => state.cart);
   console.log("CART PAGE", cart);
 
-  const totalPrice = cart.reduce((total, product) => total + product.price, 0);
-
+  const totalPrice = cart.reduce((total, product) => total + product.price * product.quantity, 0);
   const price = totalPrice.toLocaleString("en-US", {
     style: "currency",
     currency: "GBP",
   });
+
+  const combinedCart: CartItem[] = cart.reduce((combined, product) => {
+    const existingProductIndex = combined.findIndex((item) => item.title === product.title);
+
+    if (existingProductIndex !== -1) {
+      // Deep copy the existing product to avoid overwriting references
+      const existingProduct = { ...combined[existingProductIndex] };
+      existingProduct.quantity += product.quantity;
+      combined[existingProductIndex] = existingProduct;
+    } else {
+      // Deep copy the new product to avoid overwriting references
+      combined.push({ ...product });
+    }
+
+    return combined;
+  }, []);
+
+  console.log("COMBINED CART", combinedCart)
 
   return (
     <div className="p-12 h-5/6">
@@ -23,8 +40,8 @@ const ShoppingList = () => {
           <h2>Go and buy something then...</h2>
         ) : (
           <>
-            {cart.map((product) => (
-              <div className="flex mb-8">
+            {combinedCart.map((product) => (
+              <div className="flex mb-8" key={product.title}>
                 <Image
                   src={`https:${product.image}`}
                   width={300}
@@ -33,9 +50,11 @@ const ShoppingList = () => {
                   className="rounded-md mr-4"
                 />
                 <div className="flex flex-col">
-                  <h3 className="font-bold">{product.title}</h3>
+                  <h3 className="font-bold">
+                    {product.title} {product.quantity > 1 && `x ${product.quantity}`}
+                  </h3>
                   <h4>
-                    {product.price.toLocaleString("en-US", {
+                    {(product.price * product.quantity).toLocaleString("en-US", {
                       style: "currency",
                       currency: "GBP",
                     })}

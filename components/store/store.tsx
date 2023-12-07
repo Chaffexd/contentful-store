@@ -1,6 +1,24 @@
 import { create } from "zustand";
 
-const useStore = create((set, get) => ({
+export type CartItem = {
+    title: string;
+    image: string;
+    price: number;
+    quantity: number;
+}
+
+type StoreState = {
+    cart: CartItem[];
+}
+
+type StoreActions = {
+    addToCart: (item: CartItem) => void;
+    removeFromCart: (item: CartItem) => void;
+}
+
+type Store = StoreState & StoreActions;
+
+const useStore = create<Store>((set, get) => ({
     cart: [],
     addToCart: (item) => {
         set((state) => ({
