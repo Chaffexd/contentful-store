@@ -1,6 +1,10 @@
 import Product from "@/components/Product/Product";
 import { getAllProducts, getSingleProduct } from "@/helpers/helpers";
 
+type Props = {
+  params: { productId: string }
+}
+
 export async function generateStaticParams() {
   const products = await getAllProducts();
 
@@ -8,6 +12,16 @@ export async function generateStaticParams() {
     productId: product.fields.productTitle,
   }));
 }
+
+export async function generateMetadata({ params }: Props) {
+  const productId = params.productId;
+
+  const product = await getSingleProduct(productId);
+  return {
+    title: product.items[0].fields.productTitle,
+    description: product.items[0].fields.productDescription.content[0].content[0].value,
+  }
+};
 
 const ProductDetailPage = async ({
   params,

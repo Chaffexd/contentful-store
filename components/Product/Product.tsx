@@ -12,7 +12,21 @@ type ProductInfoProps = {
       fields: {
         productTitle: string;
         slug: string;
-        productDescription: {};
+        price: number;
+        productDescription: {
+          data: {};
+          content: Array<{
+            data: {};
+            content: Array<{
+              data: {};
+              marks: [];
+              value: string;
+              nodeType: string;
+            }>;
+            nodeType: string;
+          }>;
+          nodeType: string;
+        };
         category: [];
         productImage: {
           metadata: Metadata;
@@ -42,12 +56,16 @@ type ProductInfoProps = {
 
 const Product = ({ productInfo }: ProductInfoProps) => {
   console.log(
-    "PROD INFO",
-    productInfo.items[0].fields.productImage.fields.file
+    "PRODUCT INFORMATION===",
+    productInfo
   );
   const title = productInfo.items[0].fields.productTitle;
   const productDescription =
-    productInfo.items[0].fields.productImage.fields.description;
+    productInfo.items[0].fields.productDescription.content[0].content[0].value;
+  const price = productInfo.items[0].fields.price.toLocaleString("en-US", {
+    style: "currency",
+    currency: "GBP",
+  });
   const image = productInfo.items[0].fields.productImage.fields.file.url;
   return (
     <>
@@ -60,9 +78,15 @@ const Product = ({ productInfo }: ProductInfoProps) => {
           className="w-full h-full"
         />
       </div>
-      <div className="w-1/2">
-        <h1 className="font-bold text-2xl mb-4">{title}</h1>
-        <p className="text-lg">{productDescription}</p>
+      <div className="w-1/2 flex flex-col justify-between">
+        <div>
+          <h1 className="font-bold text-2xl mb-4">{title}</h1>
+          <p className="text-lg">{productDescription}</p>
+        </div>
+        <div className="flex justify-between items-center">
+          <p>{price}</p>
+          <button className="p-2 bg-blue-200 rounded-lg w-1/4 hover:bg-blue-400">Purchase Now</button>
+        </div>
       </div>
     </>
   );
