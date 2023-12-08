@@ -2,13 +2,16 @@
 import Image from "next/image";
 import useStore, { CartItem } from "../store/store";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const ShoppingList = () => {
   const cart: CartItem[] = useStore((state) => state.cart);
+  const reduceQuantity = useStore((state) => state.reduceQuantity);
+  const incrementQuantity = useStore((state) => state.incrementQuantity);
   const router = useRouter();
 
   const handleCheckoutClick = () => {
-    router.push('/cart/checkout');
+    router.push("/cart/checkout");
   };
 
   console.log("CART PAGE", cart);
@@ -22,33 +25,6 @@ const ShoppingList = () => {
     currency: "GBP",
   });
 
-  const combinedCart: CartItem[] = cart.reduce(
-    (combined: CartItem[], product: CartItem) => {
-      // this will go through the carry of items in the cart and if there are matching titles,
-      // the plan is to combine them
-      const existingProductIndex = combined.findIndex(
-        (item) => item.title === product.title
-      );
-
-      // so if items exist, copy them
-      if (existingProductIndex !== -1) {
-        // Deep copy the existing product to avoid overwriting references
-        const existingProduct = { ...combined[existingProductIndex] };
-        // increase the quantity based on how many there are
-        existingProduct.quantity += product.quantity;
-        combined[existingProductIndex] = existingProduct;
-      } else {
-        // Deep copy the new product to avoid overwriting references
-        combined.push({ ...product });
-      }
-
-      return combined;
-    },
-    []
-  );
-
-  console.log("COMBINED CART", combinedCart);
-
   return (
     <div className="p-12 h-5/6">
       <h1 className="font-bold text-2xl overflow-scroll mb-4">
@@ -59,7 +35,7 @@ const ShoppingList = () => {
           <h2>Go and buy something then...</h2>
         ) : (
           <>
-            {combinedCart.map((product) => (
+            {cart.map((product) => (
               <div className="flex mb-8" key={product.title}>
                 <Image
                   src={`https:${product.image}`}
@@ -82,6 +58,21 @@ const ShoppingList = () => {
                       }
                     )}
                   </h4>
+                  <span className="bg-slate-200 rounded-md mt-2 flex justify-between items-center w-28">
+                    <button
+                      className="bg-slate-300 h-full p-2 rounded-md w-10"
+                      onClick={() => reduceQuantity(product.title)}
+                    >
+                      -
+                    </button>
+                    {product.quantity}
+                    <button
+                      className="bg-slate-300 h-full p-2 rounded-md w-10"
+                      onClick={() => incrementQuantity(product.title)}
+                    >
+                      +
+                    </button>
+                  </span>
                 </div>
               </div>
             ))}
