@@ -25,7 +25,7 @@ type Fields = {
   navElements: NavElement[];
 };
 
-type NavElement = {
+export type NavElement = {
   metadata: Metadata;
   sys: Sys;
   fields: {

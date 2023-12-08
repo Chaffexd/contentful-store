@@ -1,6 +1,7 @@
 import { getNavBar } from "@/helpers/helpers";
 import Link from "next/link";
 import ShoppingCart from "../Cart/ShoppingCart";
+import { NavElement } from "@/models/models";
 
 const Navigation = async () => {
   const navBar = await getNavBar();
