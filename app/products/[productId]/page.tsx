@@ -1,5 +1,6 @@
 import Product from "@/components/Product/Product";
 import { getAllProducts, getSingleProduct } from "@/helpers/helpers";
+import { ProductInfo } from "@/models/models";
 
 type Props = {
   params: { productId: string }

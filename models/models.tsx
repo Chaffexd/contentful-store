@@ -76,7 +76,7 @@ type IntroductionSection = {
 };
 
 
-type ProductInfo = {
+export type ProductInfo = {
   metadata: Metadata;
   sys: Sys;
   fields: {
