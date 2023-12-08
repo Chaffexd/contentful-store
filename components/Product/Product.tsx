@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import useStore from "../store/store";
+import { Metadata, Sys } from "@/models/models";
 
 type ProductInfoProps = {
   productInfo: {
