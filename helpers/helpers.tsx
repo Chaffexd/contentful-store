@@ -31,6 +31,15 @@ export async function getProductsPage() {
   }
 }
 
+export async function getAboutUsPage() {
+  try {
+    const aboutUsPage = await client.getEntry("4g3x9G3PoBOi1Q6GwUnj9J");
+    return aboutUsPage;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export async function getProductsPageEntries() {
   try {
     const productPage = await client.getEntries();
