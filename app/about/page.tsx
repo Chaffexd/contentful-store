@@ -1,4 +1,5 @@
 import { getAboutUsPage } from "@/helpers/helpers";
+import { Sys } from "@/models/models";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,9 +10,39 @@ export const metadata: Metadata = {
     "At SkyMasters Aviation, our passion for aviation takes flight, celebrating the rich history and cutting-edge technology that defines the world of aircraft. Step into the realm where the sky is not the limit but the beginning of a thrilling journey through time and innovation.",
 };
 
+type EntryProps = {
+  metadata: { tags: [] }
+  sys: Sys;
+  fields: {
+    backdropImage: {
+      metadata: { tags: [] }
+      sys: Sys;
+      fields: {
+        title: string;
+        description: string;
+        file: {
+          url: string;
+          details: {
+            size: number;
+            image: {
+              width: number;
+              height: number;
+            }
+          }
+          fileName: string;
+          contentType: string
+        }
+      }
+    }
+    imageAltText: string;
+    title: string;
+    shortDescription: string;
+    externalLink: string;
+  }
+}
+
 const AboutPage = async () => {
   const aboutUsPage = await getAboutUsPage();
-
   const featuredPieces = aboutUsPage.fields.featuredPieces;
   const discoverMore = aboutUsPage.fields.discoverMore;
 
@@ -42,7 +73,7 @@ const AboutPage = async () => {
         </p>
       </div>
       <div className="w-full mt-24 border-t-red-400 border-t-2 pt-24 flex px-28 flex-wrap mb-36 justify-center">
-        {discoverMore.map((card) => (
+        {discoverMore.map((card: EntryProps) => (
           <section
             className="text-center w-4/12 h-72 mb-16 relative"
             key={card.sys.id}

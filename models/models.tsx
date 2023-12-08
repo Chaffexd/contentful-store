@@ -1,8 +1,8 @@
-type Metadata = {
+export type Metadata = {
   tags: any[];
 };
 
-type Sys = {
+export type Sys = {
   space: {
     sys: [];
   };
