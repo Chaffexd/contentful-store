@@ -34,7 +34,7 @@ export type NavElement = {
   };
 };
 
-type HeaderSection = {
+export type HeaderSection = {
   metadata: Metadata;
   sys: Sys;
   fields: {
@@ -42,7 +42,7 @@ type HeaderSection = {
   };
 };
 
-type ImageSection = {
+export type ImageSection = {
     metadata: Metadata;
     sys: Sys;
     fields: {
@@ -66,7 +66,7 @@ type Image = {
   };
 };
 
-type IntroductionSection = {
+export type IntroductionSection = {
   metadata: Metadata;
   sys: Sys;
   fields: {

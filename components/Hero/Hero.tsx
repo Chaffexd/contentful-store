@@ -1,3 +1,4 @@
+import { HeaderSection, ImageSection, IntroductionSection, NavElement } from "@/models/models";
 import Image from "next/image";
 
 type coreInfo = {
