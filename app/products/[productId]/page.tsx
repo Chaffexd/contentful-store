@@ -1,21 +1,7 @@
 import Product from "@/components/Product/Product";
 import { getAllProducts, getSingleProduct } from "@/helpers/helpers";
 import { ProductInfo } from "@/models/models";
-import { createClient } from "contentful";
-import {
-  createExperience,
-  fetchers,
-  ExperienceRoot,
-  useFetchExperience,
-  defineComponents,
-} from "@contentful/experience-builder";
-// components to register for EB
-import { Image } from "@/components/ctflComponents/Image";
-import { imageComponentDefinition } from "@/components/ComponentDefinitions";
 
-defineComponents([
-  { component: Image, definition: imageComponentDefinition }
-])
 
 type Props = {
   params: { productId: string };
@@ -40,11 +26,6 @@ export async function generateMetadata({ params }: Props) {
   };
 }
 
-const client = createClient({
-  space: process.env.CONTENTFUL_SPACE_ID ?? "",
-  accessToken: process.env.CONTENTFUL_ACCESS_KEY ?? "",
-});
-
 const experienceTypeId = "product";
 
 const ProductDetailPage = async ({
@@ -55,7 +36,7 @@ const ProductDetailPage = async ({
   const productId = params.productId;
   const productInfo = await getSingleProduct(productId);
 
-  // Experience builder
+ /*  // Experience builder
   const currentLocale = "en-US";
 
   const { fetchBySlug, experience } = useFetchExperience({
@@ -75,11 +56,11 @@ const ProductDetailPage = async ({
     }
   } catch (error) {
     // more errors init
-  }
+  } */
 
   return (
     <section className="px-20 pt-10 flex flex-col md:flex-row w-full gap-8 mt-16 mb-32">
-      <ExperienceRoot experience={experience} locale={currentLocale} />
+      {/* <ExperienceRoot experience={experience} locale={currentLocale} /> */}
       <Product productInfo={productInfo} />
     </section>
   );
