@@ -1,5 +1,5 @@
 import Gallery from "../../components/Gallery/Gallery";
-import { getProductsPage, getProductsPageEntries } from "../../helpers/helpers";
+import { getProductsPage } from "../../helpers/helpers";
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
