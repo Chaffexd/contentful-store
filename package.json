@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@contentful/experience-builder": "^4.0.0-next.2",
     "@contentful/live-preview": "^2.12.5",
     "@heroicons/react": "^2.0.18",
     "contentful": "^10.6.14",
