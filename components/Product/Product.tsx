@@ -59,14 +59,14 @@ type ProductInfoProps = {
 
 const Product = ({ productInfo }: ProductInfoProps) => {
   // console.log("PRODUCT INFORMATION===", productInfo);
-  const title = productInfo.items[0].fields.productTitle;
+  const title = productInfo?.items[0]?.fields.productTitle;
   const productDescription =
-    productInfo.items[0].fields.productDescription.content[0].content[0].value;
-  const price = productInfo.items[0].fields.price.toLocaleString("en-US", {
+    productInfo?.items[0].fields.productDescription.content[0].content[0].value;
+  const price = productInfo?.items[0].fields.price.toLocaleString("en-US", {
     style: "currency",
     currency: "GBP",
   });
-  const image = productInfo.items[0].fields.productImage.fields.file.url;
+  const image = productInfo?.items[0].fields.productImage.fields.file.url;
 
   const addToCart = useStore((state) => state.addToCart);
   
