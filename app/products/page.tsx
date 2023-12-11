@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 const ProductPage = async () => {
   const productPage = await getProductsPage();
-  const products = productPage.fields.products;
+  const products = productPage?.fields.products;
 
   // this is for the categories
 /*   const prods = await getProductsPageEntries();
