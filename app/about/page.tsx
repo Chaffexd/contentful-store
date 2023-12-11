@@ -43,8 +43,8 @@ type EntryProps = {
 
 const AboutPage = async () => {
   const aboutUsPage = await getAboutUsPage();
-  const featuredPieces = aboutUsPage.fields.featuredPieces;
-  const discoverMore = aboutUsPage.fields.discoverMore;
+  const featuredPieces = aboutUsPage?.fields?.featuredPieces;
+  const discoverMore = aboutUsPage?.fields?.discoverMore;
 
   return (
     <div className="w-full">
