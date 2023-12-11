@@ -1,6 +1,24 @@
-import Product from "@/components/Product/Product";
 import { getAllProducts, getSingleProduct } from "@/helpers/helpers";
 import { ProductInfo } from "@/models/models";
+import Product from "@/components/Product/Product";
+import {
+  useFetchExperience,
+  defineComponents,
+  ExperienceRoot,
+  fetchers,
+  createExperience,
+} from "@contentful/experience-builder";
+import { Image } from "@/components/ctflComponents/Image";
+import { imageComponentDefinition } from "@/components/ComponentDefinitions";
+import { createClient } from "contentful";
+import ExperienceBuilderWrapper from "@/components/ExperienceBuilder";
+
+const contentful = require("contentful");
+
+const client = contentful.createClient({
+  space: process.env.CONTENTFUL_SPACE_ID,
+  accessToken: process.env.CONTENTFUL_ACCESS_KEY,
+});
 
 export const revalidate = 300;
 
@@ -27,8 +45,6 @@ export async function generateMetadata({ params }: Props) {
   };
 }
 
-const experienceTypeId = "product";
-
 const ProductDetailPage = async ({
   params,
 }: {
@@ -36,33 +52,36 @@ const ProductDetailPage = async ({
 }) => {
   const productId = params.productId;
   const productInfo = await getSingleProduct(productId);
-
- /*  // Experience builder
+  const experienceTypeId = "product";
   const currentLocale = "en-US";
 
-  const { fetchBySlug, experience } = useFetchExperience({
+  const experienceEntry = await fetchers.fetchExperienceEntry({
     client,
-    mode: "delivery",
+    experienceTypeId,
+    locale: currentLocale,
+    identifier: {
+      slug: productId
+    }
   });
 
-  try {
-    const experience = await fetchBySlug({
-      slug: productId,
-      localeCode: currentLocale,
-      experienceTypeId,
-    });
+  const { entries, assets } = await fetchers.fetchReferencedEntities({
+    client,
+    experienceEntry,
+    locale: currentLocale,
+  });
 
-    if (!experience) {
-      // do some errors init
-    }
-  } catch (error) {
-    // more errors init
-  } */
 
   return (
     <section className="px-20 pt-10 flex flex-col md:flex-row w-full gap-8 mt-16 mb-32">
-      {/* <ExperienceRoot experience={experience} locale={currentLocale} /> */}
-      <Product productInfo={productInfo} />
+      <ExperienceBuilderWrapper
+        experienceEntry={experienceEntry}
+        referencedAssets={assets}
+        referencedEntries={entries}
+        locale={currentLocale}
+        slug={productId}
+      >
+        <Product productInfo={productInfo} />
+      </ExperienceBuilderWrapper>
     </section>
   );
 };

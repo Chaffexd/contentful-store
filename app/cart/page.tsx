@@ -1,4 +1,3 @@
-
 import ShoppingList from "@/components/Cart/ShoppingList";
 
 const CartPage = () => {

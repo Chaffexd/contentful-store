@@ -1,16 +1,4 @@
 const contentful = require("contentful");
-import {
-  ExperienceRoot,
-  useFetchExperience,
-  defineComponents,
-} from "@contentful/experience-builder";
-// components to register for EB
-import { Image } from "@/components/ctflComponents/Image";
-import { imageComponentDefinition } from "@/components/ComponentDefinitions";
-
-defineComponents([
-  { component: Image, definition: imageComponentDefinition }
-])
 
 export const client = contentful.createClient({
   space: process.env.CONTENTFUL_SPACE_ID,

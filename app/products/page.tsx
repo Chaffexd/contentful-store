@@ -1,6 +1,6 @@
-import Gallery from "../../components/Gallery/Gallery";
 import { getProductsPage } from "../../helpers/helpers";
 import type { Metadata } from 'next'
+import Gallery from "../../components/Gallery/Gallery";
 
 export const metadata: Metadata = {
   title: 'SkyMasters Aviation Products | Contentful',
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 const ProductPage = async () => {
   const productPage = await getProductsPage();
-  const products = productPage?.fields.products;
+  const products = productPage?.fields?.products;
 
   // this is for the categories
 /*   const prods = await getProductsPageEntries();

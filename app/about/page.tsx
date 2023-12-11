@@ -1,6 +1,6 @@
+import type { Metadata } from "next";
 import { getAboutUsPage } from "@/helpers/helpers";
 import { Sys } from "@/models/models";
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 

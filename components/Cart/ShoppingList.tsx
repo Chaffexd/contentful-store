@@ -1,8 +1,7 @@
 "use client";
-import Image from "next/image";
 import useStore, { CartItem } from "../store/store";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
 const ShoppingList = () => {
   const cart: CartItem[] = useStore((state) => state.cart);
