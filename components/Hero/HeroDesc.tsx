@@ -1,3 +1,6 @@
+import { Sys } from "@/models/models";
+import { Metadata } from "next";
+
 type descriptionInfoProps = {
   metadata: Metadata;
   sys: Sys;
