@@ -58,7 +58,6 @@ type ProductInfoProps = {
 };
 
 const Product = ({ productInfo }: ProductInfoProps) => {
-  // console.log("PRODUCT INFORMATION===", productInfo);
   const title = productInfo?.items[0]?.fields.productTitle;
   const productDescription =
     productInfo?.items[0].fields.productDescription.content[0].content[0].value;
