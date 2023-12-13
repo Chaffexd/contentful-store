@@ -59,6 +59,10 @@ const ProductDetailPage = async ({
 
   const data = await getExperience(productId);
 
+  if (!data) {
+    return <h1>Data is undefined.</h1>
+  }
+
   const { experienceEntry, referencedAssets, referencedEntries, locale } = data;
 
   const experience = createExperience({
