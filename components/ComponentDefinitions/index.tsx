@@ -31,10 +31,52 @@ export const imageComponentDefinition: ComponentDefinition = {
       // restricts the values to the pre-defined list of options
       validations: {
         in: [
-          { value: "value1", displayName: "Parrots" },
-          { value: "value2", displayName: "Alpaca" },
+          { value: "value1", displayName: "Aircraft" },
+          { value: "value2", displayName: "It's a plane" },
         ],
       },
+    },
+  },
+};
+
+export const titleComponentDefinition: ComponentDefinition = {
+  id: "Title",
+  name: "Title",
+  category: "Components",
+  variables: {
+    title: {
+      displayName: "Title",
+      type: "Text",
+      description: "The title of this new product",
+      defaultValue: "Example product Title",
+    },
+  },
+};
+
+export const descriptionComponentDefinition: ComponentDefinition = {
+  id: "Description",
+  name: "Description",
+  category: "Components",
+  variables: {
+    title: {
+      displayName: "Description",
+      type: "RichText",
+      description: "The description of this new product",
+      defaultValue: "Example product Description...",
+    },
+  },
+};
+
+export const priceComponentDefinition: ComponentDefinition = {
+  id: "Price",
+  name: "Price",
+  category: "Components",
+  variables: {
+    title: {
+      displayName: "Price",
+      type: "Number",
+      description: "The Price of this new product",
+      defaultValue: "Example product Price: £1234",
     },
   },
 };

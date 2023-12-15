@@ -2,57 +2,59 @@
 import Image from "next/image";
 import useStore from "../store/store";
 import { Metadata, Sys } from "@/models/models";
+import { Heading } from "@contentful/experience-builder-components";
 
+type Item = {
+  metadata: Metadata;
+  sys: Sys;
+  fields: {
+    productTitle: string;
+    slug: string;
+    price: number;
+    productDescription: {
+      data: {};
+      content: {
+        data: {};
+        content: {
+          data: {};
+          marks: [];
+          value: string;
+          nodeType: string;
+        }[];
+        nodeType: string;
+      }[];
+      nodeType: string;
+    };
+    category: [];
+    productImage: {
+      metadata: Metadata;
+      sys: Sys;
+      fields: {
+        title: string;
+        description: string;
+        file: {
+          url: string;
+          details: {
+            size: number;
+            image: {
+              width: number;
+              height: number;
+            };
+          };
+          fileName: string;
+          contentType: string;
+        };
+      };
+    };
+  };
+};
 type ProductInfoProps = {
   productInfo: {
     sys: Sys;
     total: number;
     skip: number;
     limit: number;
-    items: Array<{
-      metadata: Metadata;
-      sys: Sys;
-      fields: {
-        productTitle: string;
-        slug: string;
-        price: number;
-        productDescription: {
-          data: {};
-          content: Array<{
-            data: {};
-            content: Array<{
-              data: {};
-              marks: [];
-              value: string;
-              nodeType: string;
-            }>;
-            nodeType: string;
-          }>;
-          nodeType: string;
-        };
-        category: [];
-        productImage: {
-          metadata: Metadata;
-          sys: Sys;
-          fields: {
-            title: string;
-            description: string;
-            file: {
-              url: string;
-              details: {
-                size: number;
-                image: {
-                  width: number;
-                  height: number;
-                };
-              };
-              fileName: string;
-              contentType: string;
-            };
-          };
-        };
-      };
-    }>;
+    items: Item[];
     includes: {};
   };
 };
@@ -68,17 +70,17 @@ const Product = ({ productInfo }: ProductInfoProps) => {
   const image = productInfo?.items[0].fields.productImage.fields.file.url;
 
   const addToCart = useStore((state) => state.addToCart);
-  
+
   const currentCart = useStore((state) => state.cart);
-  console.log("THE CART:===", currentCart)
+  console.log("THE CART ===", currentCart);
 
   const addProductHandler = () => {
     addToCart({
       title: title,
       price: productInfo.items[0].fields.price,
       image: image,
-      quantity: 1
-    })
+      quantity: 1,
+    });
   };
 
   return (
@@ -99,7 +101,10 @@ const Product = ({ productInfo }: ProductInfoProps) => {
         </div>
         <div className="flex justify-between items-center">
           <p>{price}</p>
-          <button className="p-2 bg-cyan-300 rounded-lg w-1/4 hover:bg-cyan-400 text-white" onClick={addProductHandler}>
+          <button
+            className="p-2 bg-cyan-300 rounded-lg w-1/4 hover:bg-cyan-400 text-white"
+            onClick={addProductHandler}
+          >
             Add to cart
           </button>
         </div>
