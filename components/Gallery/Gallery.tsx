@@ -9,6 +9,8 @@ type ProductProps = {
   fields: {
     productTitle: string;
     productDescription: {};
+    slug: string;
+    title: string;
     category: Array<{
       type: string;
       linkType: string;
@@ -32,7 +34,7 @@ type ProductProps = {
 };
 
 const Gallery = ({ products }: { products: ProductProps[] }) => {
-  // console.log("PRODUCT RESPONSE", products[0].fields.productImage);
+  // console.log("PRODUCT RESPONSE", products.map((product) => product.fields));
 
   // console.log('CATEGORYS', products[2].fields)
 
@@ -41,7 +43,7 @@ const Gallery = ({ products }: { products: ProductProps[] }) => {
       {products.map((product) => (
         <Link
           key={product.sys.id}
-          href={`/products/${product.fields.productTitle.toLowerCase().replace(/\s+/g, '-')}`}
+          href={`/products/${product.fields.slug}` }
           className="w-full h-full relative"
         >
           <div className="w-full h-full relative">
@@ -54,7 +56,7 @@ const Gallery = ({ products }: { products: ProductProps[] }) => {
             />
             <div>
               <h1 className="font-bold text-2xl">
-                {product.fields.productTitle}
+                {product.fields.productTitle || product.fields.title}
               </h1>
             </div>
           </div>

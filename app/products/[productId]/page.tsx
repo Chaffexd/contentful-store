@@ -9,6 +9,7 @@ import {
 } from "@contentful/experience-builder";
 import {
   descriptionComponentDefinition,
+  fullProductComponent,
   imageComponentDefinition,
   priceComponentDefinition,
   titleComponentDefinition,
@@ -19,6 +20,7 @@ import { Description } from "@/components/ctflComponents/ProductDescription";
 import { Price } from "@/components/ctflComponents/Price";
 import { ContentfulLivePreview } from "@contentful/live-preview";
 import { ContentfulLivePreviewProvider } from "@contentful/live-preview/react";
+import { ProductSection } from "@/components/ctflComponents/Product";
 
 const experienceTypeId = "newProduct";
 const currentLocale = "en-US";
@@ -35,6 +37,7 @@ defineComponents([
   { component: Title, definition: titleComponentDefinition },
   { component: Description, definition: descriptionComponentDefinition },
   { component: Price, definition: priceComponentDefinition },
+  { component: ProductSection, definition: fullProductComponent }
 ]);
 
 const getExperience = async (productId: string) => {

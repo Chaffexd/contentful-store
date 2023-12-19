@@ -2,7 +2,7 @@
 import Image from "next/image";
 import useStore from "../store/store";
 import { Metadata, Sys } from "@/models/models";
-import { Heading } from "@contentful/experience-builder-components";
+import { useContentfulInspectorMode, useContentfulLiveUpdates } from "@contentful/live-preview/react";
 
 type Item = {
   metadata: Metadata;
@@ -60,14 +60,19 @@ type ProductInfoProps = {
 };
 
 const Product = ({ productInfo }: ProductInfoProps) => {
-  const title = productInfo?.items[0]?.fields.productTitle;
+  const inspectorProps = useContentfulInspectorMode();
+  const data = useContentfulLiveUpdates(productInfo);
+
+  console.log("DATA === ", productInfo)
+  
+  const title = data.items[0]?.fields.productTitle;
   const productDescription =
-    productInfo?.items[0].fields.productDescription.content[0].content[0].value;
-  const price = productInfo?.items[0].fields.price.toLocaleString("en-US", {
+    data.items[0].fields.productDescription.content[0].content[0].value;
+  const price = data.items[0].fields.price.toLocaleString("en-US", {
     style: "currency",
     currency: "GBP",
   });
-  const image = productInfo?.items[0].fields.productImage.fields.file.url;
+  const image = data.items[0].fields.productImage.fields.file.url;
 
   const addToCart = useStore((state) => state.addToCart);
 
@@ -92,15 +97,28 @@ const Product = ({ productInfo }: ProductInfoProps) => {
           width={600}
           height={600}
           className="w-full h-full"
+          {...inspectorProps({
+            fieldId: "productImage",
+            entryId: productInfo.items[0].sys.id
+          })}
         />
       </div>
       <div className="w-1/2 flex flex-col justify-between">
         <div>
-          <h1 className="font-bold text-2xl mb-4">{title}</h1>
-          <p className="text-lg">{productDescription}</p>
+          <h1 {...inspectorProps({
+            fieldId: "productTitle",
+            entryId: productInfo.items[0].sys.id
+          })} className="font-bold text-2xl mb-4">{title}</h1>
+          <p {...inspectorProps({
+            fieldId: "productDescription",
+            entryId: productInfo.items[0].sys.id
+          })} className="text-lg">{productDescription}</p>
         </div>
         <div className="flex justify-between items-center">
-          <p>{price}</p>
+          <p {...inspectorProps({
+            fieldId: "price",
+            entryId: productInfo.items[0].sys.id
+          })}>{price}</p>
           <button
             className="p-2 bg-cyan-300 rounded-lg w-1/4 hover:bg-cyan-400 text-white"
             onClick={addProductHandler}
