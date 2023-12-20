@@ -34,9 +34,9 @@ type ProductProps = {
 };
 
 const Gallery = ({ products }: { products: ProductProps[] }) => {
-  // console.log("PRODUCT RESPONSE", products.map((product) => product.fields));
+  console.log("PRODUCT RESPONSE", products.map((product) => product.fields.productDescription));
 
-  // console.log('CATEGORYS', products[2].fields)
+  // console.log('CATEGORIES', products[2].fields)
 
   return (
     <div className="w-full h-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-12 px-16">

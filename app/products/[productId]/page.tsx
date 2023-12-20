@@ -86,7 +86,8 @@ const ProductDetailPage = async ({
 }) => {
   const productId = params.productId;
   const productInfo = await getSingleProduct(productId); // this works using JS SDK
-  const data = await getExperience(productId); // this is EB
+  console.log("product info with js sdk = ", productInfo)
+  /* const data = await getExperience(productId); // this is EB
   console.log("EXPERIENCE BUILDER", data);
 
   if (!data) {
@@ -101,10 +102,10 @@ const ProductDetailPage = async ({
     referencedEntries,
     locale,
     mode: "preview",
-  });
+  }); */
 
   return (
-    <section className="px-20 pt-10 flex flex-col md:flex-row w-full gap-8 mt-16 mb-32">
+    <section className="lg:px-20 px-4 pt-10 flex flex-col md:flex-row w-full gap-8 mt-16 mb-32">
       {/* <ExperienceRoot experience={experience} locale={currentLocale} /> */}
       <ContentfulLivePreviewProvider locale={currentLocale}>
         <Product productInfo={productInfo} />

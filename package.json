@@ -11,7 +11,7 @@
   "dependencies": {
     "@contentful/experience-builder": "^4.0.0-next.2",
     "@contentful/live-preview": "^2.14.0",
-    "@heroicons/react": "^2.0.18",
+    "@heroicons/react": "^2.1.1",
     "contentful": "^10.6.14",
     "next": "14.0.3",
     "react": "^18",
